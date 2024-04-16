@@ -146,5 +146,6 @@ INSERT INTO Payment (BookingID, Amount, PaymentDate, Method, Status)
 VALUES (1, 600.00, '2024-04-15', 'Credit Card', 'Paid');
 
 select * from users;
+delete from users where username='prisha_srinidi';
 update users
 set user_type='user' where userID=2;
