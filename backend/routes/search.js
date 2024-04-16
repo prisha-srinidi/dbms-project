@@ -52,7 +52,7 @@ const search = (app, db) => {
 
   app.get("/login/user/package/:dur", (req, res) => {
     const dur = req.params.dur;
-    const sqlSelect = "select * from package where dur<=?";
+    const sqlSelect = "select * from package where dur=?";
     db.query(sqlSelect, dur, (err, result) => {
       if (err) {
         console.log("**ERROR**" + err);
@@ -65,8 +65,37 @@ const search = (app, db) => {
 
   app.get("/login/user/flight/:pid", (req, res) => {
     const pid = req.params.pid;
-    const sqlSelect = "select * from flight f, package_details p where p.";
-    db.query(sqlSelect, pname, (err, result) => {
+    const sqlSelect =
+      "select * from flight f, package_details p where p.FlightID=f.FlightID and p.PackageID=?";
+    db.query(sqlSelect, pid, (err, result) => {
+      if (err) {
+        console.log("**ERROR**" + err);
+      }
+      if (result.length > 0) {
+        res.send(result);
+      }
+    });
+  });
+
+  app.get("/login/user/hotel/:pid", (req, res) => {
+    const pid = req.params.pid;
+    const sqlSelect =
+      "select * from hotel h, package_details p where p.HotelID=h.HotelID and p.PackageID=?";
+    db.query(sqlSelect, pid, (err, result) => {
+      if (err) {
+        console.log("**ERROR**" + err);
+      }
+      if (result.length > 0) {
+        res.send(result);
+      }
+    });
+  });
+
+  app.get("/login/user/activity/:pid", (req, res) => {
+    const pid = req.params.pid;
+    const sqlSelect =
+      "select * from activity a, package_details p where a.ActivityID=p.ActivityID and p.PackageID=?";
+    db.query(sqlSelect, pid, (err, result) => {
       if (err) {
         console.log("**ERROR**" + err);
       }
