@@ -1,5 +1,5 @@
 const adminSide = (app, db) => {
-  app.get("/login/admin/package", (req, res) => {
+  app.get("/admin/package", (req, res) => {
     const sqlSelect = "select * from package";
     db.query(sqlSelect, (err, result) => {
       if (err) {
@@ -11,7 +11,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.delete("/login/admin/package/:pid", (req, res) => {
+  app.delete("/admin/package/:pid", (req, res) => {
     const pid = req.params.pid;
 
     const sqlDelete = "DELETE FROM package WHERE PackageID= ?";
@@ -25,7 +25,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.post("/login/admin/package", (req, res) => {
+  app.post("/admin/package", (req, res) => {
     const q =
       "insert into package (name,Destination,Duration,Cost,Description) values (?)";
 
@@ -45,7 +45,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.get("/login/admin/hotel", (req, res) => {
+  app.get("/admin/hotel", (req, res) => {
     const q = "select * from hotel";
 
     db.query(q, (err, result) => {
@@ -56,7 +56,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.post("/login/admin/hotel", (req, res) => {
+  app.post("/admin/hotel", (req, res) => {
     const q =
       "insert into hotel (name,City,Rating,RoomType,PricePerNight) values (?)";
 
@@ -76,7 +76,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.delete("/login/admin/hotel/:hid", (req, res) => {
+  app.delete("/admin/hotel/:hid", (req, res) => {
     const hid = req.params.hid;
     const q = "DELETE FROM hotel WHERE HotelID= ?";
 
@@ -88,7 +88,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.get("/login/admin/flight", (req, res) => {
+  app.get("/admin/flight", (req, res) => {
     const q = "select * from flight";
 
     db.query(q, (err, result) => {
@@ -99,7 +99,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.post("/login/admin/flight", (req, res) => {
+  app.post("/admin/flight", (req, res) => {
     const q =
       "insert into flight (Airline,DepartureCity,ArrivalCity,DepartureTime,ArrivalTime) values (?)";
 
@@ -119,7 +119,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.delete("/login/admin/flight/:fid", (req, res) => {
+  app.delete("/admin/flight/:fid", (req, res) => {
     const fid = req.params.fid;
     const q = "DELETE FROM flight WHERE FlightID= ?";
 
@@ -131,7 +131,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.get("/login/admin/activity", (req, res) => {
+  app.get("/admin/activity", (req, res) => {
     const q = "select * from activity";
 
     db.query(q, (err, result) => {
@@ -142,7 +142,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.post("/login/admin/activity", (req, res) => {
+  app.post("/admin/activity", (req, res) => {
     const q =
       "insert into activity (Name,Location,Description,Cost) values (?)";
 
@@ -161,7 +161,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.delete("/login/admin/activity/:aid", (req, res) => {
+  app.delete("/admin/activity/:aid", (req, res) => {
     const aid = req.params.aid;
     const q = "DELETE FROM activity WHERE ActivityID= ?";
 
@@ -173,7 +173,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.get("/login/admin/packagedetails", (req, res) => {
+  app.get("/admin/packagedetails", (req, res) => {
     const q = "select * from package_details";
 
     db.query(q, (err, result) => {
@@ -184,7 +184,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.post("/login/admin/packagedetails", (req, res) => {
+  app.post("/admin/packagedetails", (req, res) => {
     const q =
       "insert into package_details ('PackageID','ActivityID','HotelID','FlightID','DepartureDate','ReturnDate') values (?)";
 
@@ -205,7 +205,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.get("/login/admin/booking", (req, res) => {
+  app.get("/admin/booking", (req, res) => {
     const q = "select * from booking";
 
     db.query(q, (err, result) => {
@@ -216,7 +216,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.get("/login/admin/payment", (req, res) => {
+  app.get("/admin/payment", (req, res) => {
     const q = "select * from payment";
 
     db.query(q, (err, result) => {
@@ -227,7 +227,7 @@ const adminSide = (app, db) => {
     });
   });
 
-  app.delete("/login/admin/user/:uid", (req, res) => {
+  app.delete("/admin/user/:uid", (req, res) => {
     const uid = req.params.uid;
     const q = "DELETE FROM users WHERE userID= ? and user_type='user'";
 
