@@ -1,7 +1,7 @@
 //only allowing admin to login, not to register.
 //only one admin that already exists in the database can login
 import bodyParser from "body-parser";
-var urlencodedParser = bodyParser.urlencoded({ extended: false }); //middileware
+var urlencodedParser = bodyParser.urlencoded({ extended: false }); //middleware
 
 //module export
 const adminLoginHandler = (app, db) => {
@@ -11,7 +11,7 @@ const adminLoginHandler = (app, db) => {
     const password = req.body.adminPwd;
 
     //query
-    sqlSelect =
+    const sqlSelect =
       "SELECT * FROM users WHERE username= ? AND pwd=? AND user_type='Admin'";
 
     //
@@ -22,8 +22,8 @@ const adminLoginHandler = (app, db) => {
       }
       /////
       if (result.length > 0) {
-        res.send(result);
-        console.log("**RESULT SENT TO FRONT END**");
+        res.json("admin logged in");
+        console.log("admin logged in");
       } else {
         res.send({ message: "wrong username/password combination!" });
         console.log("**INVALID COMBINATION**");
