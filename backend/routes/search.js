@@ -105,3 +105,5 @@ const search = (app, db) => {
     });
   });
 };
+
+export default search;

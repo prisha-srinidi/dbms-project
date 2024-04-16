@@ -11,11 +11,11 @@ const userRegisterHandler = (app, db) => {
 
     //query
     const sqlInsert1 =
-      "INSERT INTO Customer (FirstName, LastName, Email,Phone, password, userID) VALUES (?,?,?,?,?)";
+      "INSERT INTO Customer (FirstName, LastName, Email,Phone, password, userID) VALUES (?,?,?,?,?,?)";
 
     const sqlInsert2 = "INSERT INTO users (username,pwd) VALUES (?,?)";
 
-    const sqlDelete1 = "DELETE  FROM Customers WHERE user_id= ?";
+    const sqlDelete1 = "DELETE  FROM users WHERE userID= ?";
 
     /////
     db.query(sqlInsert2, [userUserName, userPassword], (err, result) => {
@@ -23,6 +23,7 @@ const userRegisterHandler = (app, db) => {
       else {
         var user_id = result.insertId;
         //////
+
         db.query(
           sqlInsert1,
           [userFName, userLName, userMail, userPhone, userPassword, user_id],
@@ -30,11 +31,11 @@ const userRegisterHandler = (app, db) => {
             if (err) {
               console.log(err + "**ERROR INSERTING TO USER-DETAILS**");
               //////
-              db.query(sqlDelete1, [user_id], (err, result2) => {
+              db.query(sqlDelete1, user_id, (err, result2) => {
                 if (err) console.log(err);
                 else {
                   console.log("**DELETED DUE TO DUPLICATION**");
-                  res.send({ message: "Username already exist" });
+                  res.send({ message: "User already registered" });
                 }
               });
             } else {
@@ -48,4 +49,4 @@ const userRegisterHandler = (app, db) => {
   });
 };
 
-export default UserRegisterHandler;
+export default userRegisterHandler;

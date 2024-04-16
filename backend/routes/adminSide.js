@@ -238,3 +238,5 @@ const adminSide = (app, db) => {
     });
   });
 };
+
+export default adminSide;
