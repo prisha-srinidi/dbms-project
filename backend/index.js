@@ -17,6 +17,9 @@ import dashboardHandler from "./database/dashboardHandler.js";
 import adminSide from "./routes/adminSide.js";
 import search from "./routes/search.js";
 
+//booking
+import booking from "./booking/booking.js"
+
 var app = express();
 app.use(cors());
 app.use(express.json());
@@ -47,6 +50,9 @@ dashboardHandler(app, db);
 //routes
 adminSide(app, db);
 search(app, db);
+
+//booking
+booking(app,db);
 
 app.listen(8800, () => {
   console.log("Connected to backend.");
