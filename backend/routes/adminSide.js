@@ -14,10 +14,11 @@ const adminSide = (app, db) => {
   app.delete("/login/admin/package/:pid", (req, res) => {
     const pid = req.params.pid;
 
-    const sqlDelete = "DELETE FROM package WHERE pid= ?";
+    const sqlDelete = "DELETE FROM package WHERE PackageID= ?";
     db.query(sqlDelete, pid, (err, result) => {
       if (err) {
         console.log("**ERROR**" + err);
+        res.json("error in deleting package");
       } else {
         res.send({ message: "package deleted!" });
       }
@@ -26,7 +27,7 @@ const adminSide = (app, db) => {
 
   app.post("/login/admin/package", (req, res) => {
     const q =
-      "insert into package ('name','Destination','Duration','Cost','Description') values (?)";
+      "insert into package (name,Destination,Duration,Cost,Description) values (?)";
 
     // const qu =
     //   "insert into package_details ('packageid','activityid','hotelid','flightid','departuredate','returndate') values (?)";
@@ -57,7 +58,7 @@ const adminSide = (app, db) => {
 
   app.post("/login/admin/hotel", (req, res) => {
     const q =
-      "insert into hotel ('name','City','Rating','RoomType','PricePerNight') values (?)";
+      "insert into hotel (name,City,Rating,RoomType,PricePerNight) values (?)";
 
     // const qu =
     //   "insert into package_details ('packageid','activityid','hotelid','flightid','departuredate','returndate') values (?)";
@@ -100,7 +101,7 @@ const adminSide = (app, db) => {
 
   app.post("/login/admin/flight", (req, res) => {
     const q =
-      "insert into flight ('Airline','DepartureCity','ArrivalCity','DepartureTime','ArrivalTime') values (?)";
+      "insert into flight (Airline,DepartureCity,ArrivalCity,DepartureTime,ArrivalTime) values (?)";
 
     // const qu =
     //   "insert into package_details ('packageid','activityid','hotelid','flightid','departuredate','returndate') values (?)";
@@ -143,7 +144,7 @@ const adminSide = (app, db) => {
 
   app.post("/login/admin/activity", (req, res) => {
     const q =
-      "insert into activity ('Name','Location','Description','Cost') values (?)";
+      "insert into activity (Name,Location,Description,Cost) values (?)";
 
     // const qu =
     //   "insert into package_details ('packageid','activityid','hotelid','flightid','departuredate','returndate') values (?)";
@@ -228,7 +229,7 @@ const adminSide = (app, db) => {
 
   app.delete("/login/admin/user/:uid", (req, res) => {
     const uid = req.params.uid;
-    const q = "DELETE FROM user WHERE userID= ? and user_type='Customer'";
+    const q = "DELETE FROM users WHERE userID= ? and user_type='user'";
 
     db.query(q, uid, (err, result) => {
       if (err) res.json(err);
